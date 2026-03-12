@@ -21,3 +21,4 @@ _Scene graph, timeline, rendering pipeline, DSL_
 | ADR | Title | Status |
 |-----|-------|--------|
 | [ADR-100](./core/ADR-100-programmatic-video-toolbox-architecture.md) | Programmatic Video Toolbox Architecture | Draft |
+| [ADR-101](./core/ADR-101-scene-composability-and-project-structure.md) | Scene Composability and Project Structure | Draft |
