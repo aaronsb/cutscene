@@ -1,0 +1,52 @@
+# ADR Configuration
+# Defines domain numbering and validation rules.
+# Used by: docs/scripts/adr
+
+project_name: Programmatic Video Toolbox
+
+# Domain Number Series
+domains:
+  core:
+    range: [100, 199]
+    name: Core
+    description: Scene graph, timeline, rendering pipeline, DSL
+    folder: core
+
+  audio:
+    range: [200, 299]
+    name: Audio
+    description: Parametric music, TTS, mixing, sync
+    folder: audio
+
+  visual:
+    range: [300, 399]
+    name: Visual
+    description: Renderers, effects, primitives, styles
+    folder: visual
+
+  integration:
+    range: [400, 499]
+    name: Integration
+    description: External tools (LaTeX, matplotlib, asciinema, Blender)
+    folder: integration
+
+# Valid ADR statuses
+statuses:
+  - Draft
+  - Proposed
+  - Accepted
+  - Superseded
+  - Deprecated
+
+# Default values for new ADRs
+defaults:
+  deciders: [aaronsb]
+  status: Draft
+
+# Legacy ADR range (pre-domain numbering)
+legacy:
+  range: [1, 99]
+  label: "Legacy"
+
+# Viewer command for `adr view`
+viewer: cat {file}
