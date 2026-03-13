@@ -150,4 +150,20 @@ Manim is excellent for math animation but is opinionated about its scene graph, 
 An MCP server where Claude drives scene creation would be powerful for interactive authoring but adds deployment complexity, requires a running server, and locks the tool to Claude. A plain Python library is more universal — anyone can use it from any context, and Claude can drive it just fine via code generation.
 
 ### Use Remotion/Motion Canvas (JS ecosystem)
-Both are capable but require Node.js/TypeScript. The author's existing tooling (texflow, knowledge graph, whisper) is Python-native. Staying in Python keeps everything composable without polyglot friction.
+Both are capable but require Node.js/TypeScript. Remotion has a custom source-available license (free for individuals/small orgs, paid for companies with 4+ employees, mandatory telemetry from v5.0) — not suitable as the foundation of an open-source cloneable toolbox. Motion Canvas is MIT-licensed but less mature. The author's existing tooling (texflow, knowledge graph, whisper) is Python-native. Staying in Python for orchestration with a React rendering layer keeps things composable.
+
+## Supporting Evidence
+
+### Claude's Native Visual Generation (2026)
+
+Anthropic's own product validates the HTML/CSS/SVG rendering approach. Claude's "inline visuals" feature ([claude.com/blog/claude-builds-visuals](https://claude.com/blog/claude-builds-visuals)) generates **HTML + inline SVG**, rendered in a sandboxed iframe running a Next.js app with React, Recharts, Mermaid.js, and Tailwind CSS. This is architecturally identical to cutscene's rendering pipeline.
+
+Reverse engineering by [Reid Barber](https://reidbarber.com/blog/reverse-engineering-claude-artifacts) reveals the artifact system supports:
+- `application/vnd.ant.react` — React components
+- `text/html` — Single-file HTML pages
+- `image/svg+xml` — SVG vector graphics
+- `application/vnd.ant.mermaid` — Mermaid diagrams
+
+The research predecessor, **"Imagine with Claude"**, went further: LLM-as-client, browser-as-server connected via WebSocket/JSON-RPC (effectively MCP), with raw HTML patched into the DOM via morphdom, and access to Chart.js, Google Maps, jsPDF, and html2canvas.
+
+**Key takeaway**: Anthropic is actively investing in making Claude better at generating visual content as HTML/SVG/React. Building cutscene's rendering layer on this capability means betting on a trend the model provider is explicitly pushing — the capability will only improve over time.
